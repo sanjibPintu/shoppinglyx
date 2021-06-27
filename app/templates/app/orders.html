@@ -1,0 +1,67 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3>Welcome Sonam</h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'orders' %}" class="btn btn-primary">Orders</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-9 offset-sm-1">
+  {% for op in op %}
+   <div class="row shadow-sm mb-3">
+    <div class="col-sm-2">
+    <img src="{{op.product.product_image.url}}" class="img-fluid rounded-circle" height="100px" width="100px" alt="">
+    
+    </div>
+    <div class="col-sm-7">
+    <p>Prodct :{{op.product.title}}</p>
+    <p>Quantity :{{op.quantity}}</p>
+    <p>Total Price {{op.price}}</p>
+    </div>
+    <div class="col-sm-3 fw-bold">
+    {% if op.status == 'Accepted' %}
+    <p>Order Status: <span>{{op.status}}</span> </p>
+    <div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  {%  elif  op.status == 'Packed' %}
+    <p>Order Status: <span>{{op.status}}</span> </p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  {%  elif  op.status == 'On The Way' %}  
+        <p>Order Status: <span>{{op.status}}</span> </p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  {%  elif  op.status == 'Delivered' %}  
+        <p>Order Status: <span >{{op.status}}</span> </p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  {%  elif  op.status == 'Cancel' %}  
+        <p>Order Status: <span class="text-danger">{{op.status}}</span> </p>
+    </div>
+    {% else %}
+      <p>Order Status: <span>{{op.status}}</span> </p>
+      <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: %" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </div>
+    {% endif %}  
+
+    
+   </div>
+  {% endfor %}
+  </div>
+
+ </div>
+</div>
+{% endblock main-content %}
