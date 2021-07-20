@@ -9,8 +9,10 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+# product view
 class ProductView(View):
   def get(self,request):
+
     topware=Product.objects.filter(catagory='TW')
     buttomware=Product.objects.filter(catagory='BW')
     mobile=Product.objects.filter(catagory='M')
