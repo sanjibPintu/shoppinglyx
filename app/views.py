@@ -81,7 +81,7 @@ def orders(request):
   op=OrerPlaced.objects.filter(user=request.user)
   return render(request, 'app/orders.html',{'op':op})
 
-
+# for mobile
 def mobile(request ,data=None):
   if data==None:
     mobile=Product.objects.filter(catagory='M')
